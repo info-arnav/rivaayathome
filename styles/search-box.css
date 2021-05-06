@@ -1,0 +1,34 @@
+.ais-SearchBox-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #efefef;
+  border-radius: 20px;
+  padding: 20px;
+}
+.ais-SearchBox-submit {
+  display: none;
+}
+.ais-SearchBox-submitIcon {
+  color: white;
+}
+.ais-SearchBox-form {
+  width: 100%;
+  display: flex;
+  border-radius: 20px;
+  height: 100%;
+}
+.ais-SearchBox {
+  width: 100%;
+  display: inline-flex;
+  border-radius: 20px;
+  height: 100%;
+}
+.ais-SearchBox-reset {
+  display: none;
+}
+.ais-SearchBox {
+  border-radius: 20px;
+  height: 60px;
+  margin-right: 5px;
+}

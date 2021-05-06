@@ -1,0 +1,177 @@
+.fade-box .lazyload,
+.fade-box .lazyloading {
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+.fade-box img.lazyloaded {
+  opacity: 1;
+}
+.dropdown--hover {
+  position: relative;
+  z-index: 2;
+
+  &:hover {
+    .dropdown-menu-container {
+      display: block;
+    }
+  }
+}
+.aa {
+  margin-right: 5px;
+  margin-left: 1px;
+}
+.dropdown-button {
+  & > *:not(:first-child) {
+  }
+
+  * {
+    outline: none;
+  }
+}
+
+.dropdown-button-icon {
+  font-size: 18px;
+}
+
+.dropdown {
+  padding: 0 20px 0 20px !important;
+  font-size: 18px;
+}
+
+.dropdown-menu-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 10;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid #000000;
+  background-color: #ffffff;
+}
+
+.dropdown-menu-item {
+  padding: 1rem;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* DEFAULT STYLE */
+:root {
+  font-size: 16px;
+  --card-img-height: 200px;
+}
+.ais-Hits-list li {
+  list-style-position: unset !important;
+  padding: 0px !important;
+  text-indent: 0;
+}
+.containera {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-rows: masonry; /* this will do the magic */
+}
+.card {
+  align-self: flex-start;
+  position: relative;
+  width: 100&;
+  min-width: 275px;
+  margin: 1.25rem 0.75rem;
+  background: white;
+  transition: all 300ms ease-in-out;
+
+  .card-img {
+    width: 100%;
+    height: var(--card-img-height);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .card-img-hovered {
+    --card-img-hovered-overlay: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0)
+    );
+    transition: all 350ms ease-in-out;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    position: absolute;
+    height: var(--card-img-height);
+    top: 0;
+  }
+
+  .card-info {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    transition: all 200ms ease-in-out;
+
+    .card-about {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0;
+      transition: all 200ms ease-in-out;
+
+      .card-tag {
+        padding: 0.2rem 0.5rem;
+        font-size: 12px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: #505f79;
+        color: #fff;
+
+        &.tag-news {
+          background: #36b37e;
+        }
+
+        &.tag-deals {
+          background: #ffab00;
+        }
+
+        &.tag-politics {
+          width: 71px;
+          background: #ff5630;
+        }
+      }
+    }
+
+    .card-title {
+      z-index: 10;
+      font-size: 1.5rem;
+      padding-bottom: 0.75rem;
+      transition: all 350ms ease-in-out;
+    }
+
+    .card-creator {
+      padding-bottom: 0.75rem;
+      transition: all 250ms ease-in-out;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 15px 35px rgba(227, 252, 239, 0.1),
+      0px 5px 15px rgba(0, 0, 0, 0.07);
+    transform: scale(1.025);
+  }
+}
