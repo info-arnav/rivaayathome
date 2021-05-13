@@ -1,0 +1,33 @@
+{
+  "short_name": "DaisForAll",
+  "name": "DaisForAll",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "purpose": "any maskable",
+      "sizes": "570x570"
+    },
+    {
+      "src": "/logo.webp",
+      "type": "image/webp",
+      "purpose": "any maskable",
+      "sizes": "570x570"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "white",
+  "shortcuts": [
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "DaisForAll | Live thousand lives in one world.",
+      "url": "/",
+      "icons": [{ "src": "/logo.png", "sizes": "570x570" }]
+    }
+  ],
+  "description": "DaisForAll offers an opportunity to every blogger out there to display their thoughts in front of everyone. ‘Better to write for yourself and have no public, than to write for the public and have no self’. DaisForAll is a website where you can write your thoughts and let people live in a thousand worlds before they die."
+}
