@@ -82,22 +82,22 @@ export default function Footer() {
                   {
                     url: "https://www.facebook.com/infinity.newTechnology",
                     image: "/facebook.webp",
-                    media: "facebook",
+                    media: "links to facebook social media platform",
                   },
                   {
                     url: "https://www.instagram.com/infinity.newtech/",
                     image: "/instagram.webp",
-                    media: "instagram",
+                    media: "links to instagram social media platform",
                   },
                   {
                     url: "https://twitter.com/infinityNewTech",
                     image: "/twitter.webp",
-                    media: "twitter",
+                    media: "links to twitter social media platform",
                   },
                   {
                     url: "https://www.linkedin.com/in/arnav-gupta-0922341a9/",
                     image: "/linkedin.webp",
-                    media: "linkedin",
+                    media: "links to linkedin social media platform",
                   },
                 ].map((e) => (
                   <a className="fa" href={e.url} style={{ marginRight: "4px" }}>

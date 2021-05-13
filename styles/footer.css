@@ -1331,7 +1331,6 @@ a {
   transform: translate(-50%, -50%);
 }
 main {
-  padding-top: 100px;
 }
 @media (max-width: 444px) {
   #image {

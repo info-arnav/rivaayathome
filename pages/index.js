@@ -7,9 +7,22 @@ export default function Home({ status, posts, notFound }) {
   return (
     <div>
       <Head></Head>
-      {!notFound &&
+      {!notFound && (
         // Manage home page layout here
-        posts.map((e) => <div />)}
+        <main class="grid-container">
+          {posts.map((e) => (
+            <div>
+              <img
+                class="grid-item grid-item-1 lazyload"
+                src-set={`/\api\\image\\post\\${e._id}`}
+                src={e.compressed}
+                alt=""
+              />
+              <p>{posts.indexOf(e)}</p>
+            </div>
+          ))}
+        </main>
+      )}
       <br></br>
     </div>
   );

@@ -1,6 +1,8 @@
 //styles
 import "../styles/global.css";
 import "../styles/modal.css";
+import "../styles/profile.css";
+import "../styles/error404.scss";
 import "../styles/search-box.css";
 import "../styles/footer.css";
 import "../styles/posts.scss";
@@ -47,6 +49,23 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js").then(
+          function (registration) {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, []);
   const [show, setShow] = useState(false);
   // algolia credentials
   const searchClient = algoliasearch(
@@ -55,7 +74,12 @@ function MyApp({ Component, pageProps }) {
   );
   const [search, setSearch] = useState("");
   const hit = ({ hit }) => {
-    return <div></div>;
+    return (
+      <div>
+        <img class="grid-item grid-item-1" src={hit.image} alt="" />
+        <p>{1}</p>
+      </div>
+    );
   };
   // registeration and login
   const [modalForm, setModalForm] = useState(false);
@@ -112,7 +136,7 @@ function MyApp({ Component, pageProps }) {
         >
           <img
             height="60"
-            alt="Official logo of daisForAll Website"
+            alt="Logo of DaisForALl platform made for people to share things with the world."
             src="/logo.webp"
             style={{
               marginLeft: "5px",
@@ -128,7 +152,7 @@ function MyApp({ Component, pageProps }) {
             </Link>
           </div>
           <Select
-            value={selectedOption}
+            isSearchable={false}
             onChange={route}
             options={options}
             className="aa"
@@ -303,7 +327,7 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                     position: "absolute",
                     inset: "0px auto auto 0px",
                     margin: "0px",
-                    transform: "translate3d(-41px, 40px, 0px)",
+                    transform: "translate3d(-80px, 40px, 0px)",
                   }}
                   data-popper-reference-hidden="false"
                   data-popper-escaped="false"
@@ -317,7 +341,7 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                     Dashboard
                   </a>
                   <a
-                    onClick={() => router.push("/your-profile")}
+                    onClick={() => router.push(`/profile/${username}`)}
                     class="dropdown-item"
                     role="button"
                   >
@@ -330,6 +354,14 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                   >
                     Bookmarked
                   </a>
+                  <a
+                    onClick={() => router.push(`/feed/${username}`)}
+                    class="dropdown-item"
+                    role="button"
+                  >
+                    Feed
+                  </a>
+
                   <a
                     class="dropdown-item"
                     role="button"
@@ -393,7 +425,7 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
           </modal>
         )}
         {search ? (
-          <Hits hitComponent={hit}></Hits>
+          <Hits hitComponent={hit} className="grid-containers"></Hits>
         ) : (
           status && (
             <Component {...pageProps} status={status} username={username} />

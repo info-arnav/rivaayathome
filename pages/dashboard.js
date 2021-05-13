@@ -1,24 +1,178 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import FileResizer from "react-image-file-resizer";
+import axios from "axios";
+import Head from "../components/head";
 
 export default function dashboard({ status, username }) {
   let router = useRouter();
+  const [showOverAll, setShowOverAll] = useState(false);
+  const [show, setShow] = useState(false);
   useEffect(() => status == "loggedOut" && router.push("/"));
+  const [image, setImage] = useState("");
+  const [compressedImage, setCompressedImage] = useState("");
   const editorRef = useRef(null);
+  const [content, setContent] = useState(
+    <p>This is the initial content of the editor.</p>
+  );
+  const [loading, setLoading] = useState(false);
+  const post = () => {
+    !title | !description | !image | !post | !tag
+      ? setError(true)
+      : (() => {
+          setLoading(true);
+          setError(false);
+          axios
+            .post("/api/post", {
+              username: username,
+              title: title,
+              tag: tag,
+              blog: content,
+              description: description,
+              image: image,
+              compressed: compressedImage,
+            })
+            .then((e) => console.log(e.data));
+        })();
+  };
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState(false);
+  const [tag, setTag] = useState("");
+  const [description, setDescription] = useState("");
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      setContent(editorRef.current.getContent());
+    }
+  };
+  const imageChange = (event) => {
+    var fileInput = false;
+    if (event.target.files[0]) {
+      fileInput = true;
+    }
+    if (fileInput) {
+      try {
+        FileResizer.imageFileResizer(
+          event.target.files[0],
+          100,
+          100,
+          "webp",
+          100,
+          0,
+          (uri) => {
+            setCompressedImage(uri);
+            try {
+              FileResizer.imageFileResizer(
+                event.target.files[0],
+                500,
+                500,
+                "webp",
+                100,
+                0,
+                (uri) => {
+                  setImage(uri);
+                  setShow(true);
+                },
+                "base64"
+              );
+            } catch (err) {
+              console.log(err);
+            }
+          },
+          "base64"
+        );
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   var useDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   return (
     <div>
+      <Head
+        url="https://www.daisforall.com/dashboard"
+        title="DaisForAll | Dashboard"
+        description="You can post your fantastic thoghts here for others to see."
+      ></Head>
+      <div
+        hidden={showOverAll}
+        style={{
+          height: "600px",
+          width: "100%",
+          alignItems: "center",
+          display: "flex",
+        }}
+      >
+        <svg
+          style={{
+            marginLeft: "45%",
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          width="100%"
+          style={{ maxWidth: "200px", marginLeft: "auto", marginRight: "auto" }}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid"
+        >
+          <path
+            fill="none"
+            stroke="#e90c59"
+            stroke-width="8"
+            stroke-dasharray="42.76482137044271 42.76482137044271"
+            d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
+            stroke-linecap="round"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              repeatCount="indefinite"
+              dur="1s"
+              keyTimes="0;1"
+              values="0;256.58892822265625"
+            ></animate>
+          </path>
+        </svg>
+      </div>
       {status == "loggedIn" && (
-        <div style={{ width: "98%", marginLeft: "1%" }}>
+        <div style={{ width: "98%", marginLeft: "1%" }} hidden={!showOverAll}>
+          <div
+            style={{
+              border: "1px solid #c0c0af",
+              borderRadius: "5px",
+              display: "inline-flex",
+              fontSize: "16px",
+              alignItems: "center",
+              height: "38px",
+              width: "100%",
+              marginBottom: "21.6px",
+            }}
+          >
+            <div
+              style={{
+                width: "80px",
+                border: "1px solid #c0c0af",
+                textAlign: "center",
+                backgroundColor: "#edede8",
+                height: "38px",
+                borderRadius: "5px",
+                padding: "5px",
+              }}
+            >
+              Title
+            </div>
+            <input
+              required
+              style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+          </div>
           <Editor
+            value={content}
             apiKey="pj9jgbi5jyqo7yzpy2wllqiw91bjvhm43wc8ug5ttzxg6wug"
-            onInit={(evt, editor) => (editorRef.current = editor)}
+            onInit={(evt, editor) => {
+              editorRef.current = editor;
+              setShowOverAll(true);
+            }}
             initialValue="<p>This is the initial content of the editor.</p>"
             init={{
               selector: "textarea#full-featured-non-premium",
@@ -109,6 +263,150 @@ export default function dashboard({ status, username }) {
             }}
           />
           <br></br>
+          <div>
+            <div
+              style={{
+                border: "1px solid #c0c0af",
+                borderRadius: "5px",
+                marginBottom: 21.6,
+                display: "inline-flex",
+                fontSize: "16px",
+                alignItems: "center",
+                height: "38px",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  width: "80px",
+                  border: "1px solid #c0c0af",
+                  textAlign: "center",
+                  backgroundColor: "#edede8",
+                  height: "38px",
+                  borderRadius: "5px",
+                  padding: "5px",
+                }}
+              >
+                Tags
+              </div>
+              <input
+                required
+                style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+                value={tag}
+                onChange={(e) => setTag(e.target.value)}
+              ></input>
+            </div>
+            <div
+              style={{ position: "relative" }}
+              onClick={() => {
+                let a = document.querySelector(
+                  ".custom-file-container__custom-file__custom-file-input"
+                );
+                a.click();
+              }}
+            >
+              <span class="custom-file-container__custom-file__custom-file-control"></span>
+              <input
+                required
+                type="file"
+                style={{ width: "!00%" }}
+                onChange={imageChange}
+                className="custom-file-container__custom-file__custom-file-input "
+              ></input>
+            </div>
+            {show && (
+              <modal onClick={() => setShow(false)}>
+                <modal-content onClick={(e) => e.stopPropagation()}>
+                  <a
+                    style={{ fontSize: "18px" }}
+                    onClick={() => setShow(false)}
+                  >
+                    &times;
+                  </a>
+                  <img src={image} style={{ width: "100%" }}></img>
+                </modal-content>
+              </modal>
+            )}
+            {image ? (
+              <div>
+                <strong>✔ uploaded</strong>{" "}
+                <a
+                  style={{ border: "0.2px solid black", padding: "2px" }}
+                  onClick={() => setShow(true)}
+                >
+                  Show
+                </a>{" "}
+                <a
+                  style={{ border: "0.2px solid black", padding: "2px" }}
+                  onClick={() => setImage(``)}
+                >
+                  Delete
+                </a>
+              </div>
+            ) : (
+              ""
+            )}
+            <br></br>
+            <div
+              style={{
+                border: "1px solid #c0c0af",
+                borderRadius: "5px",
+                display: "inline-flex",
+                fontSize: "16px",
+                alignItems: "center",
+                marginBottom: "21.6px",
+                height: "38px",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  width: "160px",
+                  border: "1px solid #c0c0af",
+                  textAlign: "center",
+                  backgroundColor: "#edede8",
+                  height: "38px",
+                  borderRadius: "5px",
+                  padding: "5px",
+                }}
+              >
+                Description
+              </div>
+              <input
+                required
+                style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></input>
+            </div>
+            {error == true && (
+              <div style={{ color: "red" }}>All fields are required</div>
+            )}
+            <button
+              onClick={post}
+              style={{
+                marginBottom: 21.6,
+                color: "white",
+                borderRadius: 5,
+                width: "100%",
+                padding: 10,
+                fontWeight: "bold",
+                backgroundColor: "black",
+              }}
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              ) : (
+                "Publish"
+              )}
+            </button>
+          </div>
         </div>
       )}
     </div>

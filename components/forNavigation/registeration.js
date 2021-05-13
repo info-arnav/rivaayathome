@@ -90,7 +90,7 @@ export default function Registeration() {
                 "HS512"
               ),
               (function () {
-                location.replace("/dashboard");
+                location.reload();
               })()
             )
           : setResponse({ status: "error", value: e.data })

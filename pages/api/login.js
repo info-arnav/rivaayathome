@@ -13,7 +13,7 @@ export default async (req, res) => {
     !user[0]
       ? res
           .status(202)
-          .send({ status: "error", value: "username does not exist" })
+          .send({ status: "error", value: "username or email does not exist" })
       : bcrypt.compare(
           req.body.password,
           user[0].password,

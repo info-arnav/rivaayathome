@@ -16,7 +16,7 @@ nav button,
 .css-1pahdxg-control {
   width: 100px;
 }
-nav a:hover,
+nav .a:hover,
 nav button:hover,
 .css-yk16xz-control,
 .css-1pahdxg-control {
@@ -243,4 +243,52 @@ nav .toDrodown a {
   fill: currentColor;
 }
 .open {
+}
+.custom-file-container__custom-file__custom-file-input {
+  box-sizing: border-box;
+  min-width: 14rem;
+  max-width: 100%;
+  height: calc(2.25rem + 2px);
+  margin: 0;
+  opacity: 0;
+}
+.custom-file-container__custom-file__custom-file-control {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  height: calc(2.25rem + 2px);
+  padding: 0.5rem 0.75rem;
+  overflow: hidden;
+  line-height: 1.5;
+  color: #333;
+  user-select: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c0c0af;
+  border-radius: 0.25rem;
+}
+.custom-file-container__custom-file__custom-file-control::before {
+  box-sizing: border-box;
+  content: "Browse";
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 6;
+  display: block;
+  height: calc(2.25rem + 2px);
+  padding: 0.5rem 0.75rem;
+  line-height: 1.25;
+  color: #333;
+  background-color: #edede8;
+  border-left: 1px solid #c0c0af;
+}
+.custom-file-container__custom-file__custom-file-control:empty::after {
+  box-sizing: border-box;
+  content: "Choose file...";
 }

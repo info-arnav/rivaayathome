@@ -3,7 +3,7 @@ import Head from "next/head";
 export default function About() {
   return (
     <div>
-      <Head>
+      <Head url="https://www.daisforall.com/about" title="DaisForAll | About">
         <script
           key="about0-logo"
           type="application/ld+json"
@@ -12,7 +12,7 @@ export default function About() {
               "@context": "https://schema.org",
               "@type": "Organization",
               url: "https://www.daisforall.com/",
-              logo: "https://www.daisforall.cyou/logo.png",
+              logo: "https://www.daisforall.com/logo.png",
             }),
           }}
         ></script>

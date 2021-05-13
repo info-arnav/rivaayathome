@@ -26,7 +26,7 @@ export default function Login() {
               ),
               (function () {
                 setDisabled(false);
-                location.replace("/dashboard");
+                location.reload();
               })()
             )
       );
