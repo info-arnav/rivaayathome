@@ -4,7 +4,7 @@ export default function Error404() {
     <div className="error">
       <Head
         url={`https://www.daisforall.com/404`}
-        description="Page not found"
+        about="Page not found"
         title="DaisForAll | Error 404"
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>

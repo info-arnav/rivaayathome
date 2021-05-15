@@ -28,6 +28,7 @@ export default function Home({
           <Head
             url={`https://www.daisforall.com/profile/${users[0].username}`}
             title={`DaisForAll | Profile | ${users[0].username}`}
+            about={`View ${username}s profile and get to know them with more of their thoughts`}
           ></Head>
           <ProfileOther
             username={users[0].username}
@@ -51,6 +52,7 @@ export default function Home({
           <Head
             url={`https://www.daisforall.com/profile/${users[0].username}`}
             title={`DaisForAll | Your Profile`}
+            description={"View and make changes to your profile."}
           ></Head>
           <ProfileSelf
             username={username}

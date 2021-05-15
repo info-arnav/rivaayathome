@@ -141,7 +141,6 @@ export default function Head({
       {/* Twitter */}
       <meta key={40 - 1} name="twitter:title" content={title} />
       {/* Script */}
-      <script dangerouslySetInnerHTML={{ __html: script }}></script>
     </Heads>
   );
 }

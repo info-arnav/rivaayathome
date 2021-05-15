@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from "../components/head";
 
 export default function About() {
   return (

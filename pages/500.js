@@ -4,7 +4,7 @@ export default function Error500() {
     <div>
       <Head
         url={`https://www.daisforall.com/500`}
-        description="Internal Server Error"
+        about="Internal Server Error"
         title="DaisForAll | Error 500"
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>

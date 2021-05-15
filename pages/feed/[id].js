@@ -6,14 +6,64 @@ import axios from "axios";
 import Head from "../../components/head";
 import { connectToDatabase } from "../../util/mongodb";
 
-export default function dashboard({ status, username, posts, notFound }) {
+export default function feed({ status, username, posts, notFound }) {
   let router = useRouter();
   useEffect(() => status == "loggedOut" && router.push("/"));
 
   return (
     <div>
-      <Head></Head>
-      {!notFound && posts.map((e) => e.title)}
+      <Head
+        title="DaisForAll | Feed"
+        about="View and manage all of your posts here."
+      ></Head>
+      {!notFound && (
+        <div className={"masonry-with-columns"}>
+          {posts.map((e) => (
+            <div
+              style={{
+                width: "100%",
+                marginBottom: 5,
+                overflow: "hidden",
+
+                boxShadow:
+                  "0 0 1px 0 rgb(8 11 14 / 6%), 0 3px 3px -1px rgb(8 11 14 / 10%)",
+                border: "solid",
+                borderRadius: "20px",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "white",
+                  width: "100%",
+                  maxWidth: "350px",
+                  borderRadius: "20px 20px 0 0px",
+                }}
+              >
+                <img
+                  data-src={`/api/image\/post\\${e._id}`}
+                  src={e.compressed}
+                  className="lazyload blur-up"
+                  style={{
+                    width: "100%",
+                    maxWidth: "350px",
+                    borderRadius: "20px 20px 0 0px",
+                    width: "100%",
+                  }}
+                ></img>
+              </div>
+              <div
+                style={{
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                  padding: "10px",
+                }}
+              >
+                wewe
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <br></br>
     </div>
   );

@@ -92,7 +92,7 @@ export default function dashboard({ status, username }) {
       <Head
         url="https://www.daisforall.com/dashboard"
         title="DaisForAll | Dashboard"
-        description="You can post your fantastic thoghts here for others to see."
+        about="You can post your fantastic thoghts here for others to see."
       ></Head>
       <div
         hidden={showOverAll}

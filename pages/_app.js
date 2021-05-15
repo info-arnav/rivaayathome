@@ -72,12 +72,44 @@ function MyApp({ Component, pageProps }) {
     "8PCXEU15SU",
     "7b08d93fde9eb5eebb3d081f764b2ec4"
   );
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
   const hit = ({ hit }) => {
     return (
-      <div>
-        <img class="grid-item grid-item-1" src={hit.image} alt="" />
-        <p>{1}</p>
+      <div
+        style={{
+          width: "100%",
+          marginBottom: "5px",
+          boxShadow:
+            "0 0 1px 0 rgb(8 11 14 / 6%), 0 3px 3px -1px rgb(8 11 14 / 10%)",
+          border: "solid",
+          borderRadius: "20px",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "white",
+            width: "100%",
+            borderRadius: "20px 20px 0 0px",
+          }}
+        >
+          <img
+            src={hit.image}
+            style={{
+              width: "100%",
+              borderRadius: "20px 20px 0 0px",
+              width: "100%",
+            }}
+          ></img>
+        </div>
+        <div
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+            padding: "10px",
+          }}
+        >
+          wewe
+        </div>
       </div>
     );
   };
@@ -111,7 +143,7 @@ function MyApp({ Component, pageProps }) {
     } else {
       setStatus("loggedOut");
     }
-  });
+  }, []);
   return (
     <div
       onClick={() => {
@@ -131,7 +163,6 @@ function MyApp({ Component, pageProps }) {
             paddingBottom: "10px",
             justifyContent: "center",
             width: "100%",
-            marginBottom: "10px",
           }}
         >
           <img
@@ -155,9 +186,11 @@ function MyApp({ Component, pageProps }) {
             isSearchable={false}
             onChange={route}
             options={options}
+            value={selectedOption}
             className="aa"
           />
           <SearchBox
+            style={{ margin: "5px" }}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           ></SearchBox>
@@ -273,7 +306,9 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
           ) : (
             <div class="show-sropdown" onClick={(e) => e.stopPropagation()}>
               <button
-                onClick={() => setShow(!show)}
+                onClick={() => {
+                  setShow(!show);
+                }}
                 className="userLoggedin"
                 style={{
                   ":hover": { borderRadius: "50% !important" },
@@ -334,28 +369,36 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                   data-popper-placement="bottom-end"
                 >
                   <a
-                    onClick={() => router.push("/dashboard")}
+                    onClick={() => {
+                      setShow(false), router.push("/dashboard");
+                    }}
                     class="dropdown-item"
                     role="button"
                   >
                     Dashboard
                   </a>
                   <a
-                    onClick={() => router.push(`/profile/${username}`)}
+                    onClick={() => {
+                      setShow(false), router.push(`/profile/${username}`);
+                    }}
                     class="dropdown-item"
                     role="button"
                   >
                     Your Profile
                   </a>
                   <a
-                    onClick={() => router.push("/bookmarked")}
+                    onClick={() => {
+                      setShow(false), router.push(`/bookmarked/${username}`);
+                    }}
                     class="dropdown-item"
                     role="button"
                   >
                     Bookmarked
                   </a>
                   <a
-                    onClick={() => router.push(`/feed/${username}`)}
+                    onClick={() => {
+                      setShow(false), router.push(`/feed/${username}`);
+                    }}
                     class="dropdown-item"
                     role="button"
                   >
@@ -425,7 +468,7 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
           </modal>
         )}
         {search ? (
-          <Hits hitComponent={hit} className="grid-containers"></Hits>
+          <Hits hitComponent={hit} s></Hits>
         ) : (
           status && (
             <Component {...pageProps} status={status} username={username} />

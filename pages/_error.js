@@ -4,7 +4,7 @@ export default function Error({ statusCode }) {
     <div>
       <Head
         url={`https://www.daisforall.com/_error`}
-        description="Some Error Occured"
+        about="Some Error Occured"
         title={`DaisForAll | Error ${statusCode}`}
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>

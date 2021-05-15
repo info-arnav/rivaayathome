@@ -1,27 +1,59 @@
 import Link from "next/link";
 import Head from "../components/head";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { connectToDatabase } from "../util/mongodb";
 
 export default function Home({ status, posts, notFound }) {
   return (
     <div>
       <Head></Head>
+
       {!notFound && (
         // Manage home page layout here
-        <main class="grid-container">
+
+        <div className={"masonry-with-columns"}>
           {posts.map((e) => (
-            <div>
-              <img
-                class="grid-item grid-item-1 lazyload"
-                src-set={`/\api\\image\\post\\${e._id}`}
-                src={e.compressed}
-                alt=""
-              />
-              <p>{posts.indexOf(e)}</p>
+            <div
+              style={{
+                width: "100%",
+                marginBottom: "5px",
+
+                boxShadow:
+                  "0 0 1px 0 rgb(8 11 14 / 6%), 0 3px 3px -1px rgb(8 11 14 / 10%)",
+                border: "solid",
+                borderRadius: "20px",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "white",
+                  width: "100%",
+                  borderRadius: "20px 20px 0 0px",
+                }}
+              >
+                <img
+                  data-src={`/api/image\/post\\${e._id}`}
+                  src={e.compressed}
+                  className="lazyload blur-up"
+                  style={{
+                    width: "100%",
+
+                    borderRadius: "20px 20px 0 0px",
+                    width: "100%",
+                  }}
+                ></img>
+              </div>
+              <div
+                style={{
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                  padding: "10px",
+                }}
+              >
+                wewe
+              </div>
             </div>
           ))}
-        </main>
+        </div>
       )}
       <br></br>
     </div>
