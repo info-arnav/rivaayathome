@@ -16,7 +16,7 @@ export default async function (req, res) {
       const im = image[0].image.split(",")[1];
       const img = Buffer.from(im, "base64");
       res.writeHead(200, {
-        "Content-Type": "image/png",
+        "Content-Type": "image/webp",
         "Content-Length": img.length,
       });
       res.end(img);

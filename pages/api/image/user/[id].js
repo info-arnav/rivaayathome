@@ -12,7 +12,7 @@ export default async function (req, res) {
     var data = user[0].image.split(",")[1];
     var img = Buffer.from(data, "base64");
     res.writeHead(200, {
-      "Content-Type": "image/png",
+      "Content-Type": "image/webp",
       "Content-Length": img.length,
     });
     res.end(img);
