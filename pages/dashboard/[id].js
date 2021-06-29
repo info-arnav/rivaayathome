@@ -22,7 +22,7 @@ export default function dashboard({
   arrays,
 }) {
   const stripePromise = loadStripe(
-    "pk_live_51J2WdmSFEyqLJUY9J3thPCFWuGEAXBtyecOH0kcyZvifLyCUmvuwPueOKwJh6NImxQpj83aMuC0g5l8anlcl50eR00B0fu6QzX"
+    "pk_test_51J2WdmSFEyqLJUY9aP9dAOir9ABuNLDqPEsOWM3zYhXCdo1oOYh54t8Ck3ZLufBZPM3fv4eYm8PZ1gYRbVIc0EFF00FcRXbQqe"
   );
   let router = useRouter();
   let [showOverAll, setShowOverAll] = useState(false);
@@ -536,7 +536,7 @@ export default function dashboard({
 
 export async function getServerSideProps(params, ctx) {
   const stripe = new Stripe(
-    "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"
+    "sk_test_51J2WdmSFEyqLJUY9SaPf3d0hDPnxuOTDhoTD4etPLDzLbW5flg8wJQvNXpmZqFRnFBWY9eaxGcxev8Raoa9KV4P000gnJFnuEZ"
   );
 
   let paymentIntent;
