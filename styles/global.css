@@ -310,99 +310,12 @@ nav .toDrodown a {
   opacity: 0;
   transition: opacity 400ms;
 }
-/*!
- *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
-@font-face {
-  font-family: FontAwesome;
-  src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0);
-  src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0)
-      format("embedded-opentype"),
-    url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0)
-      format("woff2"),
-    url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0)
-      format("woff"),
-    url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0)
-      format("truetype"),
-    url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular)
-      format("svg");
-  font-weight: 400;
-  font-style: normal;
+.article img {
+  max-width: 100%;
 }
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.article iframe {
+  max-width: 100%;
 }
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
-@keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
-.fa-image:before {
-  content: "\f03e";
-}
-.fa-pencil:before {
-  content: "\f040";
-}
-.fa-pencil-square-o:before {
-  content: "\f044";
-}
-.fa-arrow-right:before {
-  content: "\f061";
-}
-.fa-comments:before {
-  content: "\f086";
-}
-.fa-square-o:before {
-  content: "\f096";
-}
-.fa-link:before {
-  content: "\f0c1";
-}
-.fa-square:before {
-  content: "\f0c8";
-}
-.fa-comments-o:before {
-  content: "\f0e6";
-}
-.fa-h-square:before {
-  content: "\f0fd";
-}
-.fa-info:before {
-  content: "\f129";
-}
-.fa-html5:before {
-  content: "\f13b";
-}
-.fa-pencil-square:before {
-  content: "\f14b";
-}
-.fa-long-arrow-right:before {
-  content: "\f178";
-}
-.fa-at:before {
-  content: "\f1fa";
-}
-.fa-fa:before {
-  content: "\f2b4";
+.article video {
+  max-width: 100%;
 }

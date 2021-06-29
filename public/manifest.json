@@ -1,6 +1,6 @@
 {
-  "short_name": "DaisForAll",
-  "name": "DaisForAll",
+  "short_name": "Rivaayat",
+  "name": "Rivaayat",
   "icons": [
     {
       "src": "/logo.png",
@@ -24,10 +24,10 @@
     {
       "name": "Home",
       "short_name": "Home",
-      "description": "DaisForAll | Live thousand lives in one world.",
+      "description": "Rivaayat | Live thousand lives in one world.",
       "url": "/",
       "icons": [{ "src": "/logo.png", "sizes": "570x570" }]
     }
   ],
-  "description": "DaisForAll offers an opportunity to every blogger out there to display their thoughts in front of everyone. ‘Better to write for yourself and have no public, than to write for the public and have no self’. DaisForAll is a website where you can write your thoughts and let people live in a thousand worlds before they die."
+  "description": "Rivaayat offers an opportunity to every blogger out there to display their thoughts in front of everyone. ‘Better to write for yourself and have no public, than to write for the public and have no self’. Rivaayat is a website where you can write your thoughts and let people live in a thousand worlds before they die."
 }

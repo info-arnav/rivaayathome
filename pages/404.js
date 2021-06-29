@@ -3,9 +3,9 @@ export default function Error404() {
   return (
     <div className="error">
       <Head
-        url={`https://www.daisforall.com/404`}
+        url={`https://www.rivaayathome.com/404`}
         about="Page not found"
-        title="DaisForAll | Error 404"
+        title="Rivaayat | Error 404"
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>
         <main>

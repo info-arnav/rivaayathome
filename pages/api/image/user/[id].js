@@ -1,3 +1,4 @@
+import { ObjectId } from "bson";
 import { connectToDatabase } from "../../../../util/mongodb";
 
 export default async function (req, res) {
@@ -8,7 +9,7 @@ export default async function (req, res) {
     .aggregate([{ $match: { username: id } }, { $project: { image: 1 } }])
     .limit(1)
     .toArray();
-  if (user[0].image) {
+  if (user.image) {
     var data = user[0].image.split(",")[1];
     var img = Buffer.from(data, "base64");
     res.writeHead(200, {
@@ -17,6 +18,20 @@ export default async function (req, res) {
     });
     res.end(img);
   } else {
-    res.send({ status: "error", value: "no image" });
+    const image = await db
+      .collection("emergency")
+      .aggregate([
+        { $match: { _id: ObjectId("60743b3ae474367382c95633") } },
+        { $project: { userdp: 1 } },
+      ])
+      .limit(1)
+      .toArray();
+    const im = image[0].userdp.split(",")[1];
+    const img = Buffer.from(im, "base64");
+    res.writeHead(200, {
+      "Content-Type": "image/webp",
+      "Content-Length": img.length,
+    });
+    res.end(img);
   }
 }

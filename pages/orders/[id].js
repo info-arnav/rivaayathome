@@ -3,49 +3,82 @@ import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import FileResizer from "react-image-file-resizer";
 import axios from "axios";
-import Head from "../components/head";
+import Head from "../../components/head";
+import Stripe from "stripe";
+import { parseCookies, setCookie } from "nookies";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../../components/CheckoutForm";
 
-export default function dashboard({ status, username }) {
-  let router = useRouter();
-  const [showOverAll, setShowOverAll] = useState(false);
-  const [show, setShow] = useState(false);
-  useEffect(() => status == "loggedOut" && router.push("/"));
-  const [image, setImage] = useState("");
-  const [compressedImage, setCompressedImage] = useState("");
-  const editorRef = useRef(null);
-  const [content, setContent] = useState(
-    <p>This is the initial content of the editor.</p>
+import { connectToDatabase } from "../../util/mongodb";
+
+export default function dashboard({
+  status,
+  username,
+  notFound,
+  posts,
+  paymentIntent,
+}) {
+  const stripePromise = loadStripe(
+    "pk_test_51J2WdmSFEyqLJUY9aP9dAOir9ABuNLDqPEsOWM3zYhXCdo1oOYh54t8Ck3ZLufBZPM3fv4eYm8PZ1gYRbVIc0EFF00FcRXbQqe"
   );
-  const [loading, setLoading] = useState(false);
-  const post = () => {
-    !title | !description | !image | !post | !tag
+  let router = useRouter();
+  let [showOverAll, setShowOverAll] = useState(false);
+  let [show, setShow] = useState(false);
+  useEffect(() => status == "loggedOut" && router.push("/"));
+  let [image, setImage] = useState("");
+  let [compressedImage, setCompressedImage] = useState("");
+  let editorRef = useRef(null);
+  useEffect(() => username != router.id && router.replace(username), []);
+  let [user, setUser] = useState(username);
+  let [content, setContent] = useState(description);
+  let [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const manageObject = (a) => {};
+  const changeQuantity = (a) => {};
+  useEffect(() => {
+    posts.map((e) => {
+      setTotal(total + parseInt(e.tags));
+    });
+  }, []);
+  let post = () => {
+    !title |
+    !description |
+    !image |
+    !post |
+    !tag |
+    !editorRef.current.getContent()
       ? setError(true)
-      : (() => {
+      : (async () => {
           setLoading(true);
           setError(false);
-          axios
+          await axios
             .post("/api/post", {
-              username: username,
+              username: user,
               title: title,
               tag: tag,
-              blog: content,
+              blog: editorRef.current.getContent(),
               description: description,
               image: image,
               compressed: compressedImage,
+              conditions: "",
+              computerProgramme: "",
             })
-            .then((e) => console.log(e.data));
+            .then((e) => {
+              location.replace("/product/" + e.data.insertedId);
+            });
         })();
   };
-  const [title, setTitle] = useState("");
-  const [error, setError] = useState(false);
-  const [tag, setTag] = useState("");
-  const [description, setDescription] = useState("");
-  const log = () => {
+  let [title, setTitle] = useState("");
+  let [error, setError] = useState(false);
+  let [tag, setTag] = useState("");
+  let [description, setDescription] = useState("");
+  let log = () => {
     if (editorRef.current) {
       setContent(editorRef.current.getContent());
     }
   };
-  const imageChange = (event) => {
+  let imageChange = (event) => {
     var fileInput = false;
     if (event.target.files[0]) {
       fileInput = true;
@@ -89,51 +122,98 @@ export default function dashboard({ status, username }) {
   var useDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   return (
     <div>
-      <Head
-        url="https://www.daisforall.com/dashboard"
-        title="DaisForAll | Dashboard"
-        about="You can post your fantastic thoghts here for others to see."
-      ></Head>
-      <div
-        hidden={showOverAll}
-        style={{
-          height: "600px",
-          width: "100%",
-          alignItems: "center",
-          display: "flex",
-        }}
-      >
-        <svg
+      {username == "arnav" && (
+        <div
+          hidden={showOverAll}
           style={{
-            marginLeft: "45%",
+            height: "600px",
+            width: "100%",
+            alignItems: "center",
+            display: "flex",
           }}
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="100%"
-          style={{ maxWidth: "200px", marginLeft: "auto", marginRight: "auto" }}
-          viewBox="0 0 100 100"
-          preserveAspectRatio="xMidYMid"
         >
-          <path
-            fill="none"
-            stroke="#e90c59"
-            stroke-width="8"
-            stroke-dasharray="42.76482137044271 42.76482137044271"
-            d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
-            stroke-linecap="round"
+          <svg
+            style={{
+              marginLeft: "45%",
+            }}
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            width="100%"
+            style={{
+              maxWidth: "200px",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
           >
-            <animate
-              attributeName="stroke-dashoffset"
-              repeatCount="indefinite"
-              dur="1s"
-              keyTimes="0;1"
-              values="0;256.58892822265625"
-            ></animate>
-          </path>
-        </svg>
-      </div>
-      {status == "loggedIn" && (
+            <path
+              fill="none"
+              stroke="#e90c59"
+              stroke-width="8"
+              stroke-dasharray="42.76482137044271 42.76482137044271"
+              d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
+              stroke-linecap="round"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                repeatCount="indefinite"
+                dur="1s"
+                keyTimes="0;1"
+                values="0;256.58892822265625"
+              ></animate>
+            </path>
+          </svg>
+        </div>
+      )}
+      {status == "loggedIn" && username != "arnav" && (
+        <div>
+          <Head></Head>
+          {!notFound && (
+            // Manage home page layout here
+            <bodys style={{ margin: 5 }}>
+              <section class="cart_wrapper">
+                <div class="cart_lists">
+                  <div class="cart_title">
+                    <span class="material-icons-outlined">local_mall</span>
+                    Your Orders
+                  </div>
+
+                  <div class="cart_list_wrap">
+                    <div class="cart_responsive">
+                      {posts[0] &&
+                        posts.map((e) => (
+                          <div class="tr_item">
+                            <div class="td_item item_img">
+                              <img src={e.image} />
+                            </div>
+                            <div class="td_item item_name">
+                              <label class="main">{e.title}</label>
+                              <label class="main"></label>
+                            </div>
+
+                            <div class="td_item item_price">
+                              <label>{e.tags}INR</label>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <br></br>
+            </bodys>
+          )}
+          <br></br>{" "}
+        </div>
+      )}
+      {status == "loggedIn" && username == "arnav" && (
         <div style={{ width: "98%", marginLeft: "1%" }} hidden={!showOverAll}>
+          <Head
+            url="https://www.rivaayathome.com/dashboard"
+            title="Rivaayat | Dashboard"
+            about="You can post your fantastic thoghts here for others to see."
+          ></Head>
           <div
             style={{
               border: "1px solid #c0c0af",
@@ -157,7 +237,7 @@ export default function dashboard({ status, username }) {
                 padding: "5px",
               }}
             >
-              Title
+              Product
             </div>
             <input
               required
@@ -173,7 +253,7 @@ export default function dashboard({ status, username }) {
               editorRef.current = editor;
               setShowOverAll(true);
             }}
-            initialValue="<p>This is the initial content of the editor.</p>"
+            initialValue="description"
             init={{
               selector: "textarea#full-featured-non-premium",
               plugins:
@@ -287,11 +367,15 @@ export default function dashboard({ status, username }) {
                   padding: "5px",
                 }}
               >
-                Tags
+                Price
               </div>
               <input
                 required
-                style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+                style={{
+                  marginLeft: "10px",
+                  height: "100%",
+                  width: "100%",
+                }}
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
               ></input>
@@ -374,7 +458,11 @@ export default function dashboard({ status, username }) {
               </div>
               <input
                 required
-                style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+                style={{
+                  marginLeft: "10px",
+                  height: "100%",
+                  width: "100%",
+                }}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></input>
@@ -411,4 +499,50 @@ export default function dashboard({ status, username }) {
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(params, ctx) {
+  const stripe = new Stripe(
+    "sk_test_51J2WdmSFEyqLJUY9SaPf3d0hDPnxuOTDhoTD4etPLDzLbW5flg8wJQvNXpmZqFRnFBWY9eaxGcxev8Raoa9KV4P000gnJFnuEZ"
+  );
+
+  let paymentIntent;
+
+  const { paymentIntentId } = await parseCookies(ctx);
+
+  if (paymentIntentId) {
+    paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+    return {
+      props: {
+        paymentIntent,
+      },
+    };
+  }
+  const { db } = await connectToDatabase();
+  const data = await db
+    .collection("posts")
+    .find({ orders: { username: params.params.id, quantity: 1 } })
+    .limit(40)
+    .toArray();
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+  let total = 0;
+  data.map((e) => (total = total + e.tags));
+  paymentIntent = await stripe.paymentIntents.create({
+    amount: 100,
+    currency: "INR",
+  });
+
+  setCookie(ctx, "paymentIntentId", paymentIntent.id);
+
+  return {
+    props: {
+      posts: JSON.parse(JSON.stringify(data)),
+      paymentIntent,
+    },
+  };
 }

@@ -6,7 +6,7 @@ export default async (req, res) => {
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(req.body.password, 10, async function (err, hash) {
         await db
-          .collection("useData")
+          .collection("userData")
           .insertOne({
             username: req.body.username.toLowerCase(),
             email: req.body.email,
@@ -17,6 +17,8 @@ export default async (req, res) => {
             dateUpdated: new Date(),
             profile: "",
             profiles: [""],
+            cart: [],
+            orders: [],
             passwords: [hash],
             usernames: [req.body.username],
             followers: [],

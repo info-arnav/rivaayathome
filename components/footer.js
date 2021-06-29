@@ -33,17 +33,15 @@ export default function Footer() {
               <div className="widget subscribe no-box">
                 <Link href="/" style={{ cursor: "pointer" }}>
                   <h5 className="widget-title" style={{ cursor: "pointer" }}>
-                    DaisForAll
+                    Rivaayat
                     <span></span>
                   </h5>
                 </Link>
                 <p>
-                  DaisForAll offers an opportunity to every blogger out there to
-                  display their thoughts in front of everyone. ‘Better to write
-                  for yourself and have no public, than to write for the public
-                  and have no self’. DaisForAll is a website where you can write
-                  your thoughts and let people live in a thousand worlds before
-                  they die.
+                  Rivaayat, an initiative by CDF-SRCC to uplift the artisans who
+                  toil to pursue their beautiful art form, thereby preserving
+                  our cultural heritage, putting their heart and soul on passing
+                  our country's legacy to the next generation.
                 </p>
               </div>
             </div>
@@ -58,16 +56,7 @@ export default function Footer() {
                     <Link href="/">&nbsp;Home</Link>
                   </li>
                   <li>
-                    <Link href="/about">&nbsp;About</Link>
-                  </li>
-                  <li>
-                    <Link href="/blogs">&nbsp;Blogs</Link>
-                  </li>
-                  <li>
-                    <Link href="/privacy-policy">&nbsp;Privacy Policy</Link>
-                  </li>
-                  <li>
-                    <Link href="/dashboard">&nbsp;Dashboard</Link>
+                    <Link href="/dashboard">&nbsp;Cart</Link>
                   </li>
                 </ul>
               </div>
@@ -190,7 +179,7 @@ export default function Footer() {
                   style={{ color: "white !important" }}
                 >
                   <span className="white" style={{ cursor: "pointer" }}>
-                    DaisForAll
+                    Rivaayat
                   </span>
                 </Link>{" "}
                 @ 2021. All rights reserved.

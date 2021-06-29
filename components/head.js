@@ -1,33 +1,33 @@
 import Heads from "next/head";
 
 export default function Head({
-  title = "DaisForAll | Live thousand lives in one world",
-  url = "https://www.daisforall.com/",
-  about = "DaisForAll is both like a website and a diary. A place where all people across the globe get a chance to put their views and talent in front of everyone.",
-  image = "https://www.daisforall.com/logo.png",
-  alt = "This is the official logo of DaisForAll platform.",
+  title = "Rivaayat | Live thousand lives in one world",
+  url = "https://www.rivaayathome.com/",
+  about = "Rivaayat offers modern and eco-friendly terracotta clayware pottery products including home decor, utility, and cookware; uplifting the lives of rural artisans.",
+  image = "https://www.rivaayathome.com/logo.png",
+  alt = "This is the official logo of Rivaayat platform.",
   keywords = "",
   script = "",
 }) {
-  const logo = "https://www.daisforall.com/logo.png";
-  const logoAlt = "This is the official logo of DaisForAll platform.";
+  const logo = "https://www.rivaayathome.com/logo.png";
+  const logoAlt = "This is the official logo of Rivaayat platform.";
 
   keywords =
     keywords +
-    ", daisforall, infinity, blogs, share, platform, live thousand live in one world, passionate bloggers, dais, cyou";
+    ", Rivaayat, infinity, blogs, share, platform, live thousand live in one world, passionate bloggers, dais, cyou";
   return (
     <Heads>
       {/* Langauges */}
       <link
         key={0}
         rel="alternate"
-        href="https://www.daisforall.com/"
+        href="https://www.rivaayathome.com/"
         hrefLang="x-default"
       />
       <link
         key={1}
         rel="alternate"
-        href="https://www.daisforall.com/"
+        href="https://www.rivaayathome.com/"
         hrefLang="en-us"
       />
       <link
@@ -57,7 +57,7 @@ export default function Head({
       <link
         key={6}
         rel="alternate"
-        href="https://www.daisforall.in/en-in/"
+        href="https://www.Rivaayat.in/en-in/"
         hrefLang="en-in"
       />
       {/* Same or simmiliar sites */}
@@ -76,7 +76,7 @@ export default function Head({
               "https://www.youtube.com/channel/UCzzfqCy-j9XZA5KNosqzh6w",
               "https://www.arnavgupta.net//en-nl/",
               "https://www.infinity.cyou//en-nl/",
-              "https://www.daisforall.com/",
+              "https://www.rivaayathome.com/",
               "https://www.daisonline.com/en-nl/",
               "ananyagupta.net",
               "ananya gupta",
@@ -90,7 +90,7 @@ export default function Head({
               "gaurav",
               "reyansh",
               "priyajan",
-              "https://www.daisforall.in//en-in/",
+              "https://www.Rivaayat.in//en-in/",
               "https://www.passionatebloggers.me/en-nl/",
               "https://www.instagram.com/infinity.newtech/",
               "https://www.linkedin.com/in/arnav-gupta-0922341a9/",

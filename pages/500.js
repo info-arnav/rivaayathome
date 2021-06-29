@@ -3,9 +3,9 @@ export default function Error500() {
   return (
     <div>
       <Head
-        url={`https://www.daisforall.com/500`}
+        url={`https://www.rivaayathome.com/500`}
         about="Internal Server Error"
-        title="DaisForAll | Error 500"
+        title="Rivaayat | Error 500"
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>
         <main>

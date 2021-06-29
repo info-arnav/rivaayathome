@@ -3,9 +3,9 @@ export default function Error({ statusCode }) {
   return (
     <div>
       <Head
-        url={`https://www.daisforall.com/_error`}
+        url={`https://www.rivaayathome.com/_error`}
         about="Some Error Occured"
-        title={`DaisForAll | Error ${statusCode}`}
+        title={`Rivaayat | Error ${statusCode}`}
       ></Head>
       <div style={{ width: "95%", marginLeft: "2.5%" }}>
         <main>

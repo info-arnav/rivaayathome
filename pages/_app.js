@@ -1,7 +1,7 @@
 //styles
 import "../styles/global.css";
 import "../styles/modal.css";
-import "../styles/profile.css";
+import "../styles/profile.scss";
 import "../styles/error404.scss";
 import "../styles/search-box.css";
 import "../styles/footer.css";
@@ -33,10 +33,7 @@ import NProgress from "nprogress";
 //automatic
 import { useEffect, useState } from "react";
 import Registeration from "../components/forNavigation/registeration";
-const options = [
-  { value: "Home", label: "Home" },
-  { value: "About", label: "About" },
-];
+const options = [{ value: "Home", label: "Home" }];
 const options2 = [
   { value: "Logout", label: "Logout" },
   { value: "Dashboard", label: "Dashboard" },
@@ -49,6 +46,36 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
+  const color = [
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+    "#2dd22d",
+    "#ff1a1a",
+    "#3939c6",
+    "#b85cd6",
+  ];
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
@@ -69,48 +96,20 @@ function MyApp({ Component, pageProps }) {
   const [show, setShow] = useState(false);
   // algolia credentials
   const searchClient = algoliasearch(
-    "8PCXEU15SU",
-    "7b08d93fde9eb5eebb3d081f764b2ec4"
+    "ZJLJW3F57V",
+    "aeadf5a2871e3b10e5fa1b406098ea45"
   );
   const [search, setSearch] = useState();
   const hit = ({ hit }) => {
     return (
-      <div
-        style={{
-          width: "100%",
-          marginBottom: "5px",
-          boxShadow:
-            "0 0 1px 0 rgb(8 11 14 / 6%), 0 3px 3px -1px rgb(8 11 14 / 10%)",
-          border: "solid",
-          borderRadius: "20px",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "white",
-            width: "100%",
-            borderRadius: "20px 20px 0 0px",
-          }}
-        >
-          <img
-            src={hit.image}
-            style={{
-              width: "100%",
-              borderRadius: "20px 20px 0 0px",
-              width: "100%",
-            }}
-          ></img>
-        </div>
-        <div
-          style={{
-            marginTop: "10px",
-            marginBottom: "10px",
-            padding: "10px",
-          }}
-        >
-          wewe
-        </div>
-      </div>
+      <figure href={`/product/${hit._id}`}>
+        <img src={`/api/image/post/${hit._id}`} />
+        <figcaption>{hit.title}</figcaption>
+        <span class="price">{hit.tags}INR</span>
+        <a class="button" href={`/product/${hit._id}`}>
+          Buy Now
+        </a>
+      </figure>
     );
   };
   // registeration and login
@@ -151,7 +150,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <Head></Head>
-      <InstantSearch searchClient={searchClient} indexName="dev_BLOGS">
+      <InstantSearch searchClient={searchClient} indexName="dev_PRODUCTS">
         <nav
           style={{
             paddingTop: "10px",
@@ -167,7 +166,7 @@ function MyApp({ Component, pageProps }) {
         >
           <img
             height="60"
-            alt="Logo of DaisForALl platform made for people to share things with the world."
+            alt="Logo of Rivaayat platform made for people to share things with the world."
             src="/logo.webp"
             style={{
               marginLeft: "5px",
@@ -177,9 +176,6 @@ function MyApp({ Component, pageProps }) {
           <div className="toDrodown" style={{ display: "inherit" }}>
             <Link href="/" style={{}}>
               Home
-            </Link>
-            <Link href="/about" style={{}}>
-              About
             </Link>
           </div>
           <Select
@@ -317,41 +313,25 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                   minWidth: 50,
                   borderRadius: "50%",
                   marginRight: 5,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  alignContent: "center",
+                  overflow: "hidden",
                 }}
               >
-                <svg
-                  version="1.0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20.000000pt"
-                  height="20.000000pt"
-                  viewBox="0 0 64.000000 64.000000"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <g
-                    transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
-                    fill="#000000"
-                    stroke="none"
-                  >
-                    <path
-                      d="M241 469 c-26 -26 -31 -38 -31 -79 0 -41 5 -53 31 -79 26 -26 38 -31
-79 -31 41 0 53 5 79 31 26 26 31 38 31 79 0 41 -5 53 -31 79 -26 26 -38 31
--79 31 -41 0 -53 -5 -79 -31z m136 -21 c51 -48 15 -138 -56 -138 -47 0 -81 32
--81 79 0 72 84 109 137 59z"
-                    />
-                    <path
-                      d="M466 258 c-9 -12 -16 -37 -16 -54 0 -19 -6 -34 -15 -38 -18 -7 -20
--64 -3 -101 13 -29 55 -55 88 -55 33 0 75 26 88 55 17 37 15 94 -3 101 -9 4
--15 19 -15 38 0 50 -24 76 -70 76 -29 0 -43 -6 -54 -22z m88 -24 c3 -9 6 -27
-6 -40 0 -21 -4 -24 -40 -24 -36 0 -40 3 -40 24 0 41 11 56 40 56 16 0 30 -7
-34 -16z m-24 -139 c0 -14 -4 -25 -10 -25 -5 0 -10 11 -10 25 0 14 5 25 10 25
-6 0 10 -11 10 -25z"
-                    />
-                    <path
-                      d="M219 210 c-36 -19 -99 -83 -99 -100 0 -20 21 -9 50 24 45 51 90 68
-165 64 35 -1 67 1 71 5 31 31 -131 37 -187 7z"
-                    />
-                  </g>
-                </svg>
+                <img
+                  src={`/api/image/user/${username}`}
+                  width={50}
+                  height={50}
+                  style={{
+                    ":hover": { borderRadius: "50% !important" },
+                    width: 50,
+                    height: 50,
+                    minWidth: 50,
+                    overflow: "hidden",
+                  }}
+                />
               </button>
               {show && (
                 <div
@@ -362,7 +342,7 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                     position: "absolute",
                     inset: "0px auto auto 0px",
                     margin: "0px",
-                    transform: "translate3d(-80px, 40px, 0px)",
+                    transform: "translate3d(-40px, 40px, 0px)",
                   }}
                   data-popper-reference-hidden="false"
                   data-popper-escaped="false"
@@ -370,41 +350,24 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                 >
                   <a
                     onClick={() => {
-                      setShow(false), router.push("/dashboard");
+                      setShow(false), router.push(`/dashboard/${username}`);
                     }}
                     class="dropdown-item"
                     role="button"
                   >
-                    Dashboard
+                    {username != "arnav" ? "Cart" : "New Product"}
                   </a>
-                  <a
-                    onClick={() => {
-                      setShow(false), router.push(`/profile/${username}`);
-                    }}
-                    class="dropdown-item"
-                    role="button"
-                  >
-                    Your Profile
-                  </a>
-                  <a
-                    onClick={() => {
-                      setShow(false), router.push(`/bookmarked/${username}`);
-                    }}
-                    class="dropdown-item"
-                    role="button"
-                  >
-                    Bookmarked
-                  </a>
-                  <a
-                    onClick={() => {
-                      setShow(false), router.push(`/feed/${username}`);
-                    }}
-                    class="dropdown-item"
-                    role="button"
-                  >
-                    Feed
-                  </a>
-
+                  {username != "arnav" && (
+                    <a
+                      onClick={() => {
+                        setShow(false), router.push(`/orders/${username}`);
+                      }}
+                      class="dropdown-item"
+                      role="button"
+                    >
+                      Orders
+                    </a>
+                  )}
                   <a
                     class="dropdown-item"
                     role="button"
@@ -468,7 +431,20 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
           </modal>
         )}
         {search ? (
-          <Hits hitComponent={hit} s></Hits>
+          <div id="wrap">
+            <Hits
+              style={{
+                display: "flex",
+                alignItems: "center !important",
+                flexWrap: "wrap !important",
+                marginRight: "10px",
+                width: "calc(100% - 10px)",
+              }}
+              className="ashajfbds"
+              hitComponent={hit}
+              s
+            ></Hits>
+          </div>
         ) : (
           status && (
             <Component {...pageProps} status={status} username={username} />

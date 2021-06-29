@@ -21,7 +21,21 @@ export default async function (req, res) {
       });
       res.end(img);
     } else {
-      res.send({ status: "error", value: "no image" });
+      const imagenew = await db
+        .collection("emergency")
+        .aggregate([
+          { $match: { _id: ObjectId("60743b3ae474367382c95633") } },
+          { $project: { image: 1 } },
+        ])
+        .limit(1)
+        .toArray();
+      const im = imagenew[0].image.split(",")[1];
+      const img = Buffer.from(im, "base64");
+      res.writeHead(200, {
+        "Content-Type": "image/webp",
+        "Content-Length": img.length,
+      });
+      res.end(img);
     }
   } else {
     res.send({ status: "error", value: "invalid id" });
