@@ -8,7 +8,7 @@ import Stripe from "stripe";
 import { parseCookies, setCookie } from "nookies";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "../../components/CheckoutForm";
+import CheckoutForm from "../../components/checkoutForm";
 
 import { connectToDatabase } from "../../util/mongodb";
 import { ObjectID } from "bson";
