@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.rivayaat.twa",
+      "sha256_cert_fingerprints": [
+        "97:C5:67:15:2E:BA:79:16:4F:EA:FC:C5:D3:B7:98:38:4D:05:D1:78:CA:04:44:17:57:A5:AA:39:59:A6:7E:7B"
+      ]
+    }
+  }
+]
