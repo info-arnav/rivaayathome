@@ -3,9 +3,11 @@ import Head from "../../components/head";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { connectToDatabase } from "../../util/mongodb";
 import { ObjectId, ObjectID } from "bson";
-import { useEffect } from "react";
+import Login from "./../../components/forNavigation/login";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Registeration from "../../components/forNavigation/registeration";
 
 export default function Home({ status, posts, notFound, username }) {
   const routers = useRouter();
@@ -13,7 +15,8 @@ export default function Home({ status, posts, notFound, username }) {
     if (!posts[0]) {
       routers.push("/404");
     }
-  });
+  }, modalForm);
+  const [modalForm, setModalForm] = useState(false);
   const color = [
     "#2dd22d",
     "#ff1a1a",
@@ -46,6 +49,52 @@ export default function Home({ status, posts, notFound, username }) {
   ];
   return (
     <article>
+      {modalForm && (
+        <modal onClick={() => setModalForm(false)}>
+          <modal-content onClick={(e) => e.stopPropagation()}>
+            <a
+              style={{ fontSize: "25px" }}
+              className="open"
+              onClick={() => setModalForm(false)}
+            >
+              &times;
+            </a>
+            <br></br>
+            {modalForm == "register" && (
+              <div>
+                <Registeration></Registeration>
+                <br></br>
+                <center>
+                  already registered ?{" "}
+                  <a
+                    onClick={() => {
+                      setModalForm("login");
+                    }}
+                  >
+                    Login Here
+                  </a>
+                </center>
+              </div>
+            )}
+            {modalForm == "login" && (
+              <div>
+                <Login></Login>
+                <br></br>
+                <center>
+                  not yet registered ?{" "}
+                  <a
+                    onClick={() => {
+                      setModalForm("register");
+                    }}
+                  >
+                    Register Here
+                  </a>
+                </center>
+              </div>
+            )}
+          </modal-content>
+        </modal>
+      )}
       {posts[0] && (
         <div>
           <Head
@@ -71,15 +120,18 @@ export default function Home({ status, posts, notFound, username }) {
                 </div>
                 <button
                   class="add-to-cart"
-                  disabled={status != "loggedIn"}
                   onClick={(e) => {
                     e.preventDefault();
-                    axios
-                      .post("/api/cart", { username, id: posts[0]._id })
-                      .then((e) => location.replace(`/dashboard/${username}`));
+                    status == "loggedIn"
+                      ? axios
+                          .post("/api/cart", { username, id: posts[0]._id })
+                          .then((e) =>
+                            location.replace(`/dashboard/${username}`)
+                          )
+                      : setModalForm("login");
                   }}
                 >
-                  {status != "loggedIn" ? "Login to Add" : "Add to Cart"}
+                  Add to Cart
                 </button>
               </div>
             </div>

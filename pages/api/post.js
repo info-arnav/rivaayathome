@@ -19,6 +19,7 @@ export default async (req, res) => {
     bookmarks: [],
     views: [],
     likes: [],
+    category: req.body.category,
     dateCreated: new Date(),
     dateUpdated: new Date(),
     cart: [],

@@ -355,9 +355,9 @@ l0 -275 28 -82 c36 -104 103 -236 164 -322 69 -96 206 -235 284 -287 77 -51
                     class="dropdown-item"
                     role="button"
                   >
-                    {username != "arnav" ? "Cart" : "New Product"}
+                    {username != "rivaayat1" ? "Cart" : "New Product"}
                   </a>
-                  {username != "arnav" && (
+                  {username != "rivaayat1" && (
                     <a
                       onClick={() => {
                         setShow(false), router.push(`/orders/${username}`);

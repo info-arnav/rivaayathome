@@ -27,6 +27,7 @@ export default function dashboard({
   );
   let router = useRouter();
   let [showOverAll, setShowOverAll] = useState(false);
+  let [category, setCategory] = useState("");
   let [show, setShow] = useState(false);
   useEffect(() => status == "loggedOut" && router.push("/"));
   let [image, setImage] = useState("");
@@ -67,6 +68,7 @@ export default function dashboard({
               description: description,
               image: image,
               compressed: compressedImage,
+              category: category,
               conditions: "",
               computerProgramme: "",
             })
@@ -128,7 +130,7 @@ export default function dashboard({
   var useDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   return (
     <div>
-      {username == "arnav" && (
+      {username == "rivaayat1" && (
         <div
           hidden={showOverAll}
           style={{
@@ -172,7 +174,7 @@ export default function dashboard({
           </svg>
         </div>
       )}
-      {status == "loggedIn" && username != "arnav" && (
+      {status == "loggedIn" && username != "rivaayat1" && (
         <div>
           <Head></Head>
           {!notFound && (
@@ -241,7 +243,7 @@ export default function dashboard({
           <br></br>{" "}
         </div>
       )}
-      {status == "loggedIn" && username == "arnav" && (
+      {status == "loggedIn" && username == "rivaayat1" && (
         <div style={{ width: "98%", marginLeft: "1%" }} hidden={!showOverAll}>
           <Head
             url="https://www.rivaayathome.com/dashboard"
@@ -278,6 +280,38 @@ export default function dashboard({
               style={{ marginLeft: "10px", height: "100%", width: "100%" }}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+            ></input>
+          </div>
+          <div
+            style={{
+              border: "1px solid #c0c0af",
+              borderRadius: "5px",
+              display: "inline-flex",
+              fontSize: "16px",
+              alignItems: "center",
+              height: "38px",
+              width: "100%",
+              marginBottom: "21.6px",
+            }}
+          >
+            <div
+              style={{
+                width: "80px",
+                border: "1px solid #c0c0af",
+                textAlign: "center",
+                backgroundColor: "#edede8",
+                height: "38px",
+                borderRadius: "5px",
+                padding: "5px",
+              }}
+            >
+              Category
+            </div>
+            <input
+              required
+              style={{ marginLeft: "10px", height: "100%", width: "100%" }}
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
             ></input>
           </div>
           <Editor
@@ -404,6 +438,7 @@ export default function dashboard({
                 Price
               </div>
               <input
+                type="number"
                 required
                 style={{
                   marginLeft: "10px",
