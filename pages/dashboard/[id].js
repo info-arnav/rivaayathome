@@ -19,6 +19,7 @@ export default function dashboard({
   notFound,
   posts,
   paymentIntent,
+  totals,
   arrays,
 }) {
   const stripePromise = loadStripe(
@@ -213,7 +214,7 @@ export default function dashboard({
                         </div>
                         <div class="subtotal">
                           <label>Subtotal: </label>
-                          <strong>{total}INR</strong>
+                          <strong>{totals}INR</strong>
                         </div>
                       </div>
                     )}
@@ -567,10 +568,10 @@ export async function getServerSideProps(params, ctx) {
   let array = [];
   data.map((e) => {
     array.push(e._id);
-    total = total + e.tags;
+    total = total + parseInt(e.tags);
   });
   paymentIntent = await stripe.paymentIntents.create({
-    amount: (total * 100) | 100,
+    amount: (parseInt(total) * 100) | 100,
     currency: "INR",
   });
 
@@ -578,6 +579,7 @@ export async function getServerSideProps(params, ctx) {
 
   return {
     props: {
+      totals: total,
       posts: JSON.parse(JSON.stringify(data)),
       paymentIntent,
       arrays: JSON.parse(JSON.stringify(array)),

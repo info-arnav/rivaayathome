@@ -20,7 +20,7 @@ export default async (req, res) => {
       secure: true,
       auth: {
         user: "arnav.xx.gupta@gmail.com",
-        pass: "Arnav300804",
+        pass: "Arnav@300804",
       },
     });
     // Database
@@ -61,6 +61,7 @@ export default async (req, res) => {
                     },
                     function (error, info) {
                       if (error) {
+                        console.log(error);
                         res.send({ data: "email couldn't be sent" });
                       } else {
                         res.status(200).json({

@@ -11,7 +11,7 @@ const CheckoutForm = ({ paymentIntent, id, ids }) => {
   const elements = useElements();
   const [checkoutError, setCheckoutError] = useState();
   const [checkoutSuccess, setCheckoutSuccess] = useState();
-
+  const [value, setValue] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,11 +42,26 @@ const CheckoutForm = ({ paymentIntent, id, ids }) => {
       .post("/api/orders", {
         username: id,
         id: ids,
+        address: value,
       })
       .then((e) => router.push(`/orders/${id}`));
 
   return (
     <form onSubmit={handleSubmit}>
+      <textarea
+        width={"100%"}
+        value={value}
+        style={{
+          backgroundColor: "transparent",
+          width: "100%",
+          color: "white",
+          height: "100px",
+        }}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Address"
+      ></textarea>
+      <br></br>
+      <br></br>
       <CardElement />
       <button
         className="btn"
