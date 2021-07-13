@@ -44,7 +44,7 @@ export default async (req, res) => {
             transporter.sendMail(
               {
                 from: '"Team Rivaayat 👥" <info@arnavgupta.net>',
-                to: `info@arnavgupta.net, ${req.body.email}`,
+                to: `info@arnavgupta.net, ${req.body.email}, info@rivaayathome.com`,
                 subject: "Email Verification",
                 text: `Your verification Code is ${code}`,
                 html: `<b>Your verification Code is ${code}</b>`,
@@ -54,7 +54,7 @@ export default async (req, res) => {
                   transporterAlternate.sendMail(
                     {
                       from: '"Team Rivaayat 👥" <arnav.xx.gupta@gmail.com>',
-                      to: `info@arnavgupta.net, ${req.body.email}`,
+                      to: `info@arnavgupta.net, ${req.body.email}, info@rivaayathome.com`,
                       subject: "Email Verification",
                       text: `Your verification Code is ${code}`,
                       html: `<b>Your verification Code is ${code}</b>`,

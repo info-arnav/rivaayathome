@@ -41,7 +41,7 @@ export default async (req, res) => {
     transporter.sendMail(
       {
         from: '"Team Rivaayat 👥" <info@arnavgupta.net>',
-        to: `info@arnavgupta.net, arnav.xx.gupta@gmail.com, ${object[0].email}`,
+        to: `info@arnavgupta.net, arnav.xx.gupta@gmail.com, ${object[0].email}, info@rivaayathome.com`,
         subject: "Order Places",
         text: `Order for the following has been placed. ${string}at ${req.body.address}`,
         html: `<b>Order for the following has been placed.<br>${string}at ${req.body.address}</b>`,
@@ -50,7 +50,7 @@ export default async (req, res) => {
         if (error) {
           transporterAlternate.sendMail({
             from: '"Team Rivaayat 👥" <arnav.xx.gupta@gmail.com>',
-            to: `info@arnavgupta.net, arnav.xx.gupta@gmail.com, ${oject[0].email}`,
+            to: `info@arnavgupta.net, arnav.xx.gupta@gmail.com, ${oject[0].email}, info@rivaayathome.com`,
             subject: "Order Places",
             text: `Order for the following has been placed. ${string}at ${req.body.address}`,
             html: `<b>Order for the following has been placed.<br>${string}at ${req.body.address}</b>`,
