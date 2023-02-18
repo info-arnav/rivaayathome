@@ -20,7 +20,7 @@ export default async (req, res) => {
       secure: true,
       auth: {
         user: "arnav.xx.gupta@gmail.com",
-        pass: "Arnav@300804",
+        pass: process.env.PASSWORD,
       },
     });
     // Database
